@@ -15,6 +15,53 @@
 
 <body>
 
+<script>
+
+
+$(document).ready(function()
+{
+
+    //$.getJSON('"https://api-2445581893456.production.gw.apicast.io/v2/"')
+
+    $.ajax({
+        type: 'GET',
+        url: 'https://api-2445581893456.production.gw.apicast.io/v2/',
+        //dataType: 'json'
+        
+        headers: {
+            'user-key': '7ba6b9a4901985de2c0e59a7cdcac6df',
+            'Content-Type': 'application/json'
+        },
+        success: function(data) {
+    // passed function object for data processing 
+    console.log(data);
+    
+  },
+  error: function(err) {
+    console.log('error:' + err)
+  }
+    
+    });
+});
+
+/*
+var data = JSON.stringify(false);
+
+var xhr = new XMLHttpRequest();
+xhr.withCredentials = true;
+
+xhr.addEventListener("readystatechange", function () {
+  if (this.readyState === this.DONE) {
+    console.log(this.responseText);
+  }
+});
+
+xhr.open("GET", "https://api-2445581893456.production.gw.apicast.io/v2/chains");
+
+xhr.send(data);
+    */
+    </script>
+
 
     <nav></nav>
   a
