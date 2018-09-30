@@ -14,18 +14,57 @@
   
 
 <body>
+        <ul class="nav nav-tabs nav-justified">
+                <li role="presentation" class="active"><a href="#">Home</a></li>
+                <li role="presentation"><a href="#">Profile</a></li>
+                <li role="presentation"><a href="#">Messages</a></li>
+              </ul>
+
+              <div class="jumbotron">
+                    <h1>Hello, world!</h1>
+                    <p>...</p>
+                    <p><a class="btn btn-primary btn-lg" href="#" role="button">Learn more</a></p>
+                  </div>
+
+        <div class="col-md-4">Car Insurance</div>
+        <div class="col-md-4">Estimation</div>
+        <div class="col-md-4">Tool</div>
 
 <script>
+var data = JSON.stringify(false);
+
+var xhr = new XMLHttpRequest();
+xhr.withCredentials = true;
+
+xhr.addEventListener("readystatechange", function () {
+  if (this.readyState === this.DONE) {
+    console.log(this.responseText);
+  }
+
+});
+/*
+xhr.open("GET", "https://api-2445581893456.production.gw.apicast.io/v2/");
+xhr.setRequestHeader('user-key', '7ba6b9a4901985de2c0e59a7cdcac6df');
+//xhr.setRequestHeader('Content-Type', 'application/json');
+xhr.setRequestHeader('origin', window.location.hostname);
+xhr.send(data);*/
+var testdata = JSON.stringify({
+  "external_ids": [
+    "U2FyYWggQ2FyIEluc3VyYW5jZQ=="
+  ],
+  "content": "U2FyYWggQ2FyIEluc3VyYW5jZQ=="
+});
 
 
 $(document).ready(function()
 {
 
     //$.getJSON('"https://api-2445581893456.production.gw.apicast.io/v2/"')
-
+    
     $.ajax({
         type: 'GET',
-        url: 'https://api-2445581893456.production.gw.apicast.io/v2/',
+        url: 'https://api-2445581893456.production.gw.apicast.io/v2/chains',
+       // url: 'https://api-2445581893456.production.gw.apicast.io/v2/',
         //dataType: 'json'
         
         headers: {
@@ -35,14 +74,68 @@ $(document).ready(function()
         success: function(data) {
     // passed function object for data processing 
     console.log(data);
-    
+
   },
   error: function(err) {
     console.log('error:' + err)
   }
     
     });
+    $.ajax({
+    
+    
+        url: 'https://api-2445581893456.production.gw.apicast.io/v2/chains',
+        dataType: 'json',
+        type: 'post',
+        headers: {
+            'user-key': '7ba6b9a4901985de2c0e59a7cdcac6df',
+            'Content-Type': 'application/json'
+        },
+        data: testdata ,
+      
+       success: function(data) {
+    // passed function object for data processing 
+    console.log("here i am");
+    console.log(data);
+   // console.log(data.entry_hash);
+
+
+  },
+  error: function(err) {
+    console.log('error:' + err)
+  }
+
+    });
+/*
+ $.ajax({
+        type: 'GET',
+        url: 'https://api-2445581893456.production.gw.apicast.io/v2/chains/493972de2ecb3bb658750c6187496b3aaaa5cb8add966e185183c54ac3c97cdb',
+       // url: 'https://api-2445581893456.production.gw.apicast.io/v2/',
+        //dataType: 'json'
+        
+        headers: {
+            'user-key': '7ba6b9a4901985de2c0e59a7cdcac6df',
+            'Content-Type': 'application/json'
+        },
+        success: function(data) {
+    // passed function object for data processing 
+    //console.log(data);
+   
+  // var responsedata = $.parseJSON(data);
+    console.log("hi");
+    console.log(data);
+    
+
+  },
+  error: function(err) {
+    console.log('error:' + err)
+  }
+    
+    });*/
+
 });
+
+
 
 /*
 var data = JSON.stringify(false);
@@ -64,6 +157,6 @@ xhr.send(data);
 
 
     <nav></nav>
-  a
+  
 </body>
 </html>
