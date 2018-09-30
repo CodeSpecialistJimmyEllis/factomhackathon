@@ -6,3 +6,151 @@
     color: white;
     
 }
+
+html, body
+{
+    font-family: 'Roboto', sans-serif;
+}
+a
+{
+    text-decoration: none;
+}
+#logo
+{
+    width: 64px;
+    height: 64px;
+  
+    
+
+}
+a
+{
+    font-weight: bold;
+    color: white;
+}
+
+#colora
+{
+  background-color: rgb(71,130,174);
+    color: white;
+}
+
+#colorb
+{
+    background-color: rgb(213,125,61);
+}
+
+#colorc
+{
+background-color: rgb(221,188,25);
+}
+h1
+{
+    text-align: center;
+}
+
+#designa
+{
+   /* border-radius: 8px; */
+    /* border: 1px solid black; */
+    background-color: rgb(71,130,174);
+   
+    
+}
+#designb
+{
+  /*  border-radius: 8px; */
+    /* border: 1px solid black; */
+    background-color: rgb(213,125,61);
+   
+    
+}
+#designc
+{
+  /*  border-radius: 8px; */
+   /* border: 1px solid black;  */
+    background-color: rgb(221,188,25);
+   
+    
+}
+
+#lionking
+{
+  background-color: #d5d5d5;
+  margin: 0;
+  padding: 0;
+}
+
+#tumonandpumba
+{
+    background-color: #d5d5d5;
+    margin: 0;
+    padding: 0;
+}
+
+#displayimage
+{
+    width: 128px;
+    height: 128px;
+}
+
+#mulan
+{
+    padding: 0;
+   margin-right: 0;
+   margin-left: 0;
+    text-align: center;
+    font-weight: bold;
+    background-color: black;
+    color: white;
+    border-color: white;
+}
+
+
+#tackle
+{
+    margin: 0;
+    padding: 0;
+}
+#jumboedit
+{
+    margin: 0;
+}
+#good
+{
+    font-weight: bold;
+}
+
+.clickgifplay
+{
+
+}
+.clickplaystop
+{
+
+}
+#smartsimulation
+{
+    
+}
+
+#ubiplace
+{
+     font-size: 50px;
+     text-align: center;
+     background-color:  #d5d5d5;
+}
+.finishproject
+{
+    border-radius: 8px;
+    border: 1px solid black; 
+}
+#pleasestyle
+{
+    background-color: black;
+    color: white;
+    font-size: 13px;
+    text-align: center;
+    text-weight: bold;
+
+}

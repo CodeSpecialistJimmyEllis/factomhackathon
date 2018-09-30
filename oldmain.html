@@ -1,0 +1,212 @@
+<!doctype html>
+<html>
+<head>
+    <title>Factom Hackathon</title>
+     <script type="text/javascript" src="jquery-3.1.1.js"></script>
+    <script type="text/javascript" src="bootstrap/js/bootstrap.js"></script>
+    <link rel="stylesheet" type="text/css" href="animate.css" />
+    <link rel="stylesheet" type="text/css" href="bootstrap/css/bootstrap.css">
+    <link rel="stylesheet" type="text/css" href="bootstrap/css/bootstrap-theme.css">
+   <!-- <link rel="stylesheet" type="text/css" href="StyleSheet.css" />-->
+    <link rel="stylesheet" type="text/css" href="style.css" />
+    <link rel="stylesheet" href="gifplayer.css" />
+    <script src="jquery.gifplayer.js"></script>
+    <link href="https://fonts.googleapis.com/css?family=Raleway|Roboto" rel="stylesheet">
+    <script type="text/javascript" src="app.js"></script> 
+</head>
+
+  
+
+<body>
+        <ul class="nav nav-tabs nav-justified">
+                <li role="presentation" class="active" ><a id="colora" href="#"><!--<img id="logo" src="factomlogotransparent.png">-->Factom Hackathon Team Planet Express </a></li>
+                <li role="presentation"><a  id="colorb" href="#"><!--<img id="logo" src="factomlogotransparent.png">-->P2P Usage Based Insurance</a></li>
+                <li role="presentation"><a  id="colorc" href="#"><!--<img id="logo" src="factomlogotransparent.png">-->P2P Car Sharing</a></li>
+              </ul>
+              
+
+              <div id="jumboedit" class="jumbotron">
+                    <h1>P2P UBI for Car Sharing!</h1>
+                    <img src="factomlogotransparent.png">
+                    <div class="col-md-4"> </div>
+                    <!--
+                    <p>...</p>
+                    <p><a class="btn btn-primary btn-lg" href="#" role="button">Learn more</a></p>-->
+                  </div>
+                  
+
+        <div id="tackle"  class="col-md-4"><div id="designa"><img id="displayimage" class="center-block" src="Bobtransparent.png"></div>
+            <P id="mulan">Bob has a car he never drives, & parking’s expensive</P></div>
+        <div id="tackle" class="col-md-4"><div id="designb"><img  id="displayimage"  class="center-block"  src="Mollytransparent.png"></div>
+            <p id="mulan">Molly needs a car for those errands when Uber just won’t do</p></div>
+        <div id="tackle" class="col-md-4"><div id="designc"><img id="displayimage"  class="center-block"  src="insurancetransparent.png"></div><p id="mulan">Bob & Molly need insurance coverage</p></div>
+
+        <div id="lionking" class="col-md-6"><p id="mulan">P2P Car Sharing</p>  
+            <p id="good">Open market place links car owners with drivers
+                 & a smart contract executed via Factom’s
+                 blockchain facilitates the rental agreement</p>
+        </div>
+        <div id="tumonandpumba"  class="col-md-6"><p id="mulan">P2P Usage Based Insurance:</p>
+
+               <P id="good" > Drivers enter into group-funded risk pool & smart
+                    contracts executed via Factom’s blockchain facilitate 
+                    dynamic underwriting & claims/subrogation</P></div>
+
+            <div>
+                <img class="gifplayer" src="media/caranimation.png">
+                <button class="clickgifplay">Run Simulation</button>
+			<button class="clickgifstop">Stop Simulation</button>
+            <div id="likes" class="like"></div>
+            <div><input type="button" id="pause" value="pause"></div>
+
+            </div>
+
+<script>
+    /*
+var data = JSON.stringify(false);
+
+var xhr = new XMLHttpRequest();
+xhr.withCredentials = true;
+
+xhr.addEventListener("readystatechange", function () {
+  if (this.readyState === this.DONE) {
+    console.log(this.responseText);
+  }
+
+});*/
+/*
+xhr.open("GET", "https://api-2445581893456.production.gw.apicast.io/v2/");
+xhr.setRequestHeader('user-key', '7ba6b9a4901985de2c0e59a7cdcac6df');
+//xhr.setRequestHeader('Content-Type', 'application/json');
+xhr.setRequestHeader('origin', window.location.hostname);
+xhr.send(data);*/
+// test data to send to the the block chain converted into base 64
+var testdata = JSON.stringify({
+  "external_ids": [
+    "U2FyYWggQ2FyIEluc3VyYW5jZQ=="
+  ],
+  "content": "U2FyYWggQ2FyIEluc3VyYW5jZQ=="
+});
+
+// the beginning of the jquery file
+$(document).ready(function()
+{
+   
+    $('.clickgifplay').click(
+					function() {
+                        $('.gifplayer').gifplayer();
+						$('.gifplayer').gifplayer('play');
+					}
+				)
+
+				$('.clickgifstop').click(
+					function() {
+                       
+						$('.gifplayer').gifplayer('stop');
+					}
+                )
+                
+
+    //$.getJSON('"https://api-2445581893456.production.gw.apicast.io/v2/"')
+    // the get call that calls and gets all the block chain information
+    $.ajax({
+        type: 'GET',
+        url: 'https://api-2445581893456.production.gw.apicast.io/v2/chains',
+       // url: 'https://api-2445581893456.production.gw.apicast.io/v2/',
+        //dataType: 'json'
+        
+        headers: {
+            'user-key': '7ba6b9a4901985de2c0e59a7cdcac6df',
+            'Content-Type': 'application/json'
+        },
+        success: function(data) {
+    // passed function object for data processing 
+    console.log(data);
+
+  },
+  error: function(err) {
+    console.log('error:' + err)
+  }
+    
+    });
+    // another ajax call that posts to the block chain the test data that is written is base 
+    // 64
+    $.ajax({
+    
+    
+        url: 'https://api-2445581893456.production.gw.apicast.io/v2/chains',
+        dataType: 'json',
+        type: 'post',
+        headers: {
+            'user-key': '7ba6b9a4901985de2c0e59a7cdcac6df',
+            'Content-Type': 'application/json'
+        },
+        data: testdata ,
+      
+       success: function(data) {
+    // passed function object for data processing 
+    console.log("here i am");
+    console.log(data);
+   // console.log(data.entry_hash);
+
+
+  },
+  error: function(err) {
+    console.log('error:' + err)
+  }
+
+    });
+/*
+ $.ajax({
+        type: 'GET',
+        url: 'https://api-2445581893456.production.gw.apicast.io/v2/chains/493972de2ecb3bb658750c6187496b3aaaa5cb8add966e185183c54ac3c97cdb',
+       // url: 'https://api-2445581893456.production.gw.apicast.io/v2/',
+        //dataType: 'json'
+        
+        headers: {
+            'user-key': '7ba6b9a4901985de2c0e59a7cdcac6df',
+            'Content-Type': 'application/json'
+        },
+        success: function(data) {
+    // passed function object for data processing 
+    //console.log(data);
+   
+  // var responsedata = $.parseJSON(data);
+    console.log("hi");
+    console.log(data);
+    
+
+  },
+  error: function(err) {
+    console.log('error:' + err)
+  }
+    
+    });*/
+
+});
+
+
+
+/*
+var data = JSON.stringify(false);
+
+var xhr = new XMLHttpRequest();
+xhr.withCredentials = true;
+
+xhr.addEventListener("readystatechange", function () {
+  if (this.readyState === this.DONE) {
+    console.log(this.responseText);
+  }
+});
+
+xhr.open("GET", "https://api-2445581893456.production.gw.apicast.io/v2/chains");
+
+xhr.send(data);
+    */
+    </script>
+
+
+    <nav></nav>
+  
+</body>
+</html>

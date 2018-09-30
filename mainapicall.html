@@ -1,0 +1,273 @@
+<!doctype html>
+<html>
+<head>
+    <title>Factom Hackathon</title>
+     <script type="text/javascript" src="jquery-3.1.1.js"></script>
+    <script type="text/javascript" src="bootstrap/js/bootstrap.js"></script>
+    <link rel="stylesheet" type="text/css" href="animate.css" />
+    <link rel="stylesheet" type="text/css" href="bootstrap/css/bootstrap.css">
+    <link rel="stylesheet" type="text/css" href="bootstrap/css/bootstrap-theme.css">
+    <link rel="stylesheet" type="text/css" href="StyleSheet.css" />
+    <script type="text/javascript" src="app.js"></script> 
+</head>
+
+<body>
+        <ul class="nav nav-tabs nav-justified">
+                <li role="presentation" class="active"><a href="#">Home</a></li>
+                <li role="presentation"><a href="#">Profile</a></li>
+                <li role="presentation"><a href="#">Messages</a></li>
+              </ul>
+
+              <div class="jumbotron">
+                    <h1>Hello, world!</h1>
+                    <p>...</p>
+                    <p><a class="btn btn-primary btn-lg" href="#" role="button" id="addOne">Add One</a></p>
+                    <p><a class="btn btn-primary btn-lg" href="#" role="button" id="initialize">Initialize</a></p>
+                  </div>
+
+        <div class="col-md-4">Car Insurance</div>
+        <div class="col-md-4">Estimation</div>
+        <div class="col-md-4">Tool</div>
+    <div id="initialize">init</div><div id="addOne">Add one</div>
+<script defer>
+var testdata = JSON.stringify({
+  "external_ids": [
+    "U2FyYWggQ2FyIEluc3VyYW5jZQ=="
+  ],
+  "content": "U2FyYWggQ2FyIEluc3VyYW5jZQ=="
+});
+$(document).ready(function() {
+  // callFactom(testdata, 'https://api-2445581893456.production.gw.apicast.io/v2/chains')
+  
+});
+document.getElementById('addOne').addEventListener( 'click', function () {
+      console.log("hitAPI ran")
+      var data = sampleData;
+          data.speed = data.speed + getRandomAdjustment(5)
+          data.acceleration = data.acceleration + getRandomAdjustment(0.5)
+      console.log(data)
+      sendUpdate(data)
+});
+document.getElementById('initialize').addEventListener( 'click', function() {
+  console.log(sodium.to_base64)
+  var EID = Base64.encode('planetExpress-driveChain-data-sarah-smith')
+  var contentJson = {
+    "msg" : "Initializing drive chain for user Sarah", 
+    "recordType" : "driveChain Initialization"
+  }
+  var content = Base64.encode(JSON.stringify(contentJson))
+  // initialization set
+  var initData = JSON.stringify({
+    "external_ids": [
+      EID
+    ],
+    "content": content
+  });  
+  // init
+  callFactom(initData, 'https://api-2445581893456.production.gw.apicast.io/v2/chains')
+});
+var sampleData = {
+  "road_type" : "0",
+  "coordinates" : "00927492018482",
+  "speed" : 10.5,
+  "acceleration" : 2,
+  "timestamp" : new Date(),
+  "recordType":"driveData"
+}
+function getRandomAdjustment (set) {
+  var num = Math.floor(Math.random()*set) + 1; // this will get a number between 1 and 99;
+      num *= Math.floor(Math.random()*2) == 1 ? 1 : -1;
+  return num
+}
+function sendUpdate (data) {
+  var uniqueID = "driveData_" + new Date ()
+  console.log(uniqueID)
+  var EID = Base64.encode(uniqueID)
+  console.log(EID)
+  var sendData = JSON.stringify(data)
+  console.log('sendData', sendData)
+  var content = Base64.encode(sendData)
+  // initialization set
+  var initData = JSON.stringify({
+    "external_ids": [
+      EID
+    ],
+    "content": content
+  });  
+  console.log(initData)
+  // init
+  callFactom(initData, 'https://api-2445581893456.production.gw.apicast.io/v2/chains/ef9d47a081ef8bafb510d21468f3edda027e09787c968e0c9a32f57e62fad87d/entries')
+}
+// document.getElementById('search').addEventListener( 'click', function() {
+  
+//   var EID = toBase64('planetExpress-driveChain')
+//   var contentJson = {
+//     "msg" : "first message!" 
+//   }
+//   var content = toBase64(contentJson)
+//   // initialization set
+//   var initData = JSON.stringify({
+//     "external_ids": [
+//       EID
+//     ],
+//     "content": content
+//   });  
+//   // init
+//   callFactom(initData, 'https://api-2445581893456.production.gw.apicast.io/v2/chains')
+// });
+window.sodium = {
+      onload: function (sodium) {
+          let h = sodium.crypto_generichash(64, sodium.from_string('test'));
+          console.log("sodium",sodium.to_hex(h));
+      }
+  };
+var Base64 = {
+// private property
+_keyStr : "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/=",
+// public method for encoding
+encode : function (input) {
+    var output = "";
+    var chr1, chr2, chr3, enc1, enc2, enc3, enc4;
+    var i = 0;
+    console.log(input)
+    input = Base64._utf8_encode(input);
+    while (i < input.length) {
+        chr1 = input.charCodeAt(i++);
+        chr2 = input.charCodeAt(i++);
+        chr3 = input.charCodeAt(i++);
+        enc1 = chr1 >> 2;
+        enc2 = ((chr1 & 3) << 4) | (chr2 >> 4);
+        enc3 = ((chr2 & 15) << 2) | (chr3 >> 6);
+        enc4 = chr3 & 63;
+        if (isNaN(chr2)) {
+            enc3 = enc4 = 64;
+        } else if (isNaN(chr3)) {
+            enc4 = 64;
+        }
+        output = output +
+        this._keyStr.charAt(enc1) + this._keyStr.charAt(enc2) +
+        this._keyStr.charAt(enc3) + this._keyStr.charAt(enc4);
+    }
+    return output;
+},
+// public method for decoding
+decode : function (input) {
+    var output = "";
+    var chr1, chr2, chr3;
+    var enc1, enc2, enc3, enc4;
+    var i = 0;
+    input = input.replace(/[^A-Za-z0-9\+\/\=]/g, "");
+    while (i < input.length) {
+        enc1 = this._keyStr.indexOf(input.charAt(i++));
+        enc2 = this._keyStr.indexOf(input.charAt(i++));
+        enc3 = this._keyStr.indexOf(input.charAt(i++));
+        enc4 = this._keyStr.indexOf(input.charAt(i++));
+        chr1 = (enc1 << 2) | (enc2 >> 4);
+        chr2 = ((enc2 & 15) << 4) | (enc3 >> 2);
+        chr3 = ((enc3 & 3) << 6) | enc4;
+        output = output + String.fromCharCode(chr1);
+        if (enc3 != 64) {
+            output = output + String.fromCharCode(chr2);
+        }
+        if (enc4 != 64) {
+            output = output + String.fromCharCode(chr3);
+        }
+    }
+    output = Base64._utf8_decode(output);
+    return output;
+},
+// private method for UTF-8 encoding
+_utf8_encode : function (string) {
+    console.log(string)
+    string = string.replace(/\r\n/g,"\n");
+    var utftext = "";
+    for (var n = 0; n < string.length; n++) {
+        var c = string.charCodeAt(n);
+        if (c < 128) {
+            utftext += String.fromCharCode(c);
+        }
+        else if((c > 127) && (c < 2048)) {
+            utftext += String.fromCharCode((c >> 6) | 192);
+            utftext += String.fromCharCode((c & 63) | 128);
+        }
+        else {
+            utftext += String.fromCharCode((c >> 12) | 224);
+            utftext += String.fromCharCode(((c >> 6) & 63) | 128);
+            utftext += String.fromCharCode((c & 63) | 128);
+        }
+    }
+    return utftext;
+},
+// private method for UTF-8 decoding
+_utf8_decode : function (utftext) {
+    var string = "";
+    var i = 0;
+    var c = c1 = c2 = 0;
+    while ( i < utftext.length ) {
+        c = utftext.charCodeAt(i);
+        if (c < 128) {
+            string += String.fromCharCode(c);
+            i++;
+        }
+        else if((c > 191) && (c < 224)) {
+            c2 = utftext.charCodeAt(i+1);
+            string += String.fromCharCode(((c & 31) << 6) | (c2 & 63));
+            i += 2;
+        }
+        else {
+            c2 = utftext.charCodeAt(i+1);
+            c3 = utftext.charCodeAt(i+2);
+            string += String.fromCharCode(((c & 15) << 12) | ((c2 & 63) << 6) | (c3 & 63));
+            i += 3;
+        }
+    }
+    return string;
+}
+}
+function toBase64 (string) {
+  console.log(string)
+  return sodium.to_base64([string])
+}
+function callFactom (data, url) {
+    $.ajax({
+    
+        url: url,
+        dataType: 'json',
+        type: 'post',
+        headers: {
+            'user-key': '7ba6b9a4901985de2c0e59a7cdcac6df',
+            'Content-Type': 'application/json'
+        },
+        data: data ,
+      
+       success: function(response) {
+          // passed function object for data processing 
+          console.log("response is ", response, "url is ", url);
+        },
+        error: function(err) {
+          console.log('error:' + err)
+        }
+    });
+  }
+/*
+var data = JSON.stringify(false);
+var xhr = new XMLHttpRequest();
+xhr.withCredentials = true;
+xhr.addEventListener("readystatechange", function () {
+  if (this.readyState === this.DONE) {
+    console.log(this.responseText);
+  }
+});
+xhr.open("GET", "https://api-2445581893456.production.gw.apicast.io/v2/chains");
+xhr.send(data);
+    */
+    </script>
+
+
+    <nav></nav>
+
+
+
+</body>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/libsodium-wrappers/0.5.4/sodium.js" async></script>
+</html>
