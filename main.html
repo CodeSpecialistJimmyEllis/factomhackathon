@@ -122,6 +122,7 @@
                       $('.imgc').addClass('animated bounce');
                       });
                    
+                     
                     document.getElementById('addOne').addEventListener( 'click', function () {
                           console.log("hitAPI ran")
                           var data = sampleData;
@@ -130,7 +131,17 @@
                           console.log(data)
                           sendUpdate(data)
                     });
-
+                    
+                   /* function factomDone () {
+                          console.log("hitAPI ran")
+                          var data = sampleData;
+                              data.speed = data.speed + getRandomAdjustment(5)
+                              data.acceleration = data.acceleration + getRandomAdjustment(0.5)
+                          console.log(data)
+                          sendUpdate(data)
+                    }
+                    document.getElementById('addOne').addEventListener( 'click', setInterval(factomDone(),2000));
+*/
                     document.getElementById('smartcontract').addEventListener( 'click', function () {
                         console.log("Click stop");
                         var decodedString = Base64.decode(superdata);
@@ -162,24 +173,24 @@
     console.log(freedata.speed);
     if ( freedata.speed <= 5 )
     {
-        ubicharge = 100;    
+        ubicharge = 10;    
     }
     else if ((freedata.speed >= 6)&& (freedata.speed <= 10))
     {
-        ubicharge = 200;
+        ubicharge = 20;
     }
     else if ((freedata.speed >= 11) && (freedata.speed <= 15))
     {
-        ubicharge = 250;
+        ubicharge = 25;
     }
     else if ((freedata.speed >= 16) && (freedata.speed <= 20))
     {
-        ubicharge = 300;
+        ubicharge = 30;
     }
 
     else 
     {
-        ubicharge = 350;
+        ubicharge = 35;
     }
    
     // insert code that puts ubichrage into website
