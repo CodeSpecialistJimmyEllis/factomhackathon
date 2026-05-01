@@ -1,7 +1,7 @@
 # factomhackathon
 
 
-This is the Factom Smart Contract Hackathon that won third place $1500 dollars.
+This is the Factom Smart Contract Hackathon 2019 that won third place $1500 dollars.
 
 
 This project calls the factom blockchain API and writes information to it. It then uses that information to write a smart contract and 
@@ -45,3 +45,5 @@ we have now is that the information about the driver was written on the BLOCK CH
 
  They were going to announce who won later that Sunday. The Smart Lady left to go ride bikes but I warned her that "We may win. You might not want to leave. You really should stay
  to see if we are going to win or not." She didn't care. We won. She got her money some how. Team work makes the dream work. 3 Developers and a Visionary changing the world. 
+
+Actually later on at another hackathon about two months from this one at 1871 ( https://1871.com/ ) I met up with all three of them again. We decided not to be on the same team. And we all individually lost the next hackathon. It was cool seeing them again though. 
